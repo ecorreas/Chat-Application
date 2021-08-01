@@ -12,39 +12,39 @@ Foi proposto que fizémos uma aplicação de chat no componente curricular de Re
 
 ## Atores <a name="atores"></a>
 <p align="center">
-  <img src="app/lib/assets/to_readme/atores.jpeg">
+  <img src="assets/to_readme/atores.jpeg">
 </p>
 <p align="center"><em>Figura 1. Diagrama de casos de uso</em></p>
 
 ## Casos de uso <a name="casosdeuso"></a>
 A Tabela 1 apresenta os casos de usos de forma priorizada, onde os casos de uso definidos com prioridade alta deverão ser apresentados na versão final do produto desenvolvido diferentemente dos casos de uso com prioridade média e baixa que poderão ou não ser apresentados na entrega final do produto.
 <p align="center">
-  <img src="app/lib/assets/to_readme/casodeuso.png">
+  <img src="assets/to_readme/casodeuso.png">
 </p>
 <p align="center"><em>Tabela 1. Priorização de casos de uso</em></p>
 
 ## Componentes <a name="componentes"></a>
 <p align="center">
-  <img src="app/lib/assets/to_readme/componentes.jpeg">
+  <img src="assets/to_readme/componentes.jpeg">
 </p>
 <p align="center"><em>Figura 2. Diagrama de componentes</em></p>
 
 ## Diagramas de sequência <a name="diagramas"></a>
 ### UC01-Identificação ###
 <p align="center">
-  <img src="app/lib/assets/to_readme/Identificação.png">
+  <img src="assets/to_readme/Identificação.png">
 </p>
 <p align="center"><em>Figura 3. Diagrama de sequência do UC01-Identificação</em></p>
 
 ### UC02-Iniciar conversa ###
 <p align="center">
-  <img src="app/lib/assets/to_readme/IniciarConversa.png">
+  <img src="assets/to_readme/IniciarConversa.png">
 </p>
 <p align="center"><em>Figura 4. Diagrama de sequência do UC02-Iniciar conversa</em></p>
 
 ### UC03-Visualizar conversas ###
 <p align="center">
-  <img src="app/lib/assets/to_readme/visualizarConversas.png">
+  <img src="assets/to_readme/visualizarConversas.png">
 </p>
 <p align="center"><em>Figura 5. Diagrama de sequência do UC03-Visualizar conversas</em></p>
 
