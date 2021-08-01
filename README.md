@@ -1,6 +1,6 @@
 # Chat-Application
 
-Foi proposto no componente curricular que fizémos uma aplicação de chat no componente curricular de Redes de Computadores. A aplicação deveria ser obrigatoriamente implementada utilizando API de sockets (TCP ou UDP).
+Foi proposto que fizémos uma aplicação de chat no componente curricular de Redes de Computadores. A aplicação deveria ser obrigatoriamente implementada utilizando API de sockets (TCP ou UDP).
 
 # Sumário
 1. [Atores](#atores)
