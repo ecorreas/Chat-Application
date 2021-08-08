@@ -2,7 +2,11 @@ import 'package:app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class BarNameConectionComponet extends StatelessWidget {
-  const BarNameConectionComponet({Key? key}) : super(key: key);
+  final String name;
+  final bool isConnected;
+  const BarNameConectionComponet(
+      {Key? key, required this.name, required this.isConnected})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +16,7 @@ class BarNameConectionComponet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'Auri Gabriel',
+            name,
             style: TextStyle(
                 color: AppColors.black,
                 fontSize: 20,
@@ -32,9 +36,9 @@ class BarNameConectionComponet extends StatelessWidget {
             width: 25,
           ),
           Text(
-            'Sem conexão',
+            isConnected ? 'Conectado' : 'Sem Conexão',
             style: TextStyle(
-                color: AppColors.black50,
+                color: isConnected ? Colors.green : AppColors.black50,
                 fontSize: 20,
                 fontWeight: FontWeight.w400),
           ),

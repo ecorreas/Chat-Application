@@ -10,7 +10,8 @@ class ChatController {
   late IMessageSender _sender;
   late IMessageReceiver _receiver;
 
-  Future<void> initConection() async {
+  Future<void> initConection(
+      {required void Function(MessageModel) onReceiveMessage}) async {
     _socket = await Socket.connect('localhost', 4567);
     _sender = MessageSender(_socket);
     _receiver = MessageReceiver(_socket);
@@ -19,12 +20,17 @@ class ChatController {
       final map = jsonDecode(message);
       final result = MessageModel.fromMap(map);
       print(result.message);
+      onReceiveMessage(result);
     });
   }
 
-  Future<void> sendMessage(String message) {
-    return _sender
-        .send(MessageModel(message: message, indentification: 'Matheus'));
+  Future<bool> sendMessage({required MessageModel message}) async {
+    final result = await _sender.send(message);
+    return result;
+  }
+
+  MessageModel onReceiveMessage(MessageModel message) {
+    return message;
   }
 
   void close() {

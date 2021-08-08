@@ -1,4 +1,4 @@
-import 'package:app/app/view/chat/chat_page.dart';
+import 'package:app/app/view/home/home_page.dart';
 import 'package:app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +10,7 @@ class AppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primarySwatch: Colors.deepPurple, backgroundColor: AppColors.white),
-      home: ChatPage(),
+      home: HomePage(),
     );
   }
 }

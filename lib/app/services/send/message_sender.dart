@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:app/app/models/message_model.dart';
 
 abstract class IMessageSender {
-  Future<void> send(MessageModel message);
+  Future<bool> send(MessageModel message);
 }
 
 class MessageSender implements IMessageSender {
@@ -11,7 +11,8 @@ class MessageSender implements IMessageSender {
   MessageSender(this._socket);
 
   @override
-  Future<void> send(MessageModel message) async {
+  Future<bool> send(MessageModel message) async {
     _socket.write(message.toJson());
+    return true;
   }
 }

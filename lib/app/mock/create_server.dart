@@ -24,8 +24,11 @@ void handleConnection(Socket client) {
       final json = jsonDecode(message);
       print(json['message']);
       await Future.delayed(Duration(seconds: 2));
-      client.write(MessageModel(message: "corninho", indentification: 'kildere')
-          .toJson());
+
+      var line = stdin.readLineSync();
+      client.write(
+          MessageModel(message: line!.trim(), indentification: 'Server')
+              .toJson());
     },
 
     // handle errors
