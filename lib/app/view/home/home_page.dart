@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                 )
               : Center(
                   child: Text(
-                    'Bem vindo ao\nChat Aplication',
+                    'Bem vindo ao\nChat Application',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 40, fontWeight: FontWeight.w300),
                   ),
