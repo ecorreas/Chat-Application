@@ -1,6 +1,8 @@
 import 'package:app/app/controller/app/app_controller.dart';
 import 'package:app/app/models/contact_model.dart';
+import 'package:app/app/view/components/default_button.dart';
 import 'package:app/app/view/components/default_textfield.dart';
+import 'package:app/app/view/new%20connection/new_connection.dart';
 import 'package:app/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -111,6 +113,13 @@ class _ContactBarState extends State<ContactBar> {
             SizedBox(
               height: 25,
             ),
+            DefaultButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => NewConnection()),
+                  );
+                },
+                title: "New Connection")
           ],
         ),
       ),
