@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class DefaultTextField extends StatelessWidget {
   final String? hintText;
+  final void Function(String)? onSubimitted;
   final TextEditingController? controller;
-  const DefaultTextField({Key? key, this.controller, this.hintText})
+  const DefaultTextField({Key? key, this.controller, this.hintText, this.onSubimitted})
       : super(key: key);
 
   @override
@@ -16,6 +17,7 @@ class DefaultTextField extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
+        onSubmitted: onSubimitted,
         decoration: InputDecoration(
             hintText: this.hintText,
             contentPadding: EdgeInsets.symmetric(horizontal: 10),

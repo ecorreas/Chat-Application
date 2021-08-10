@@ -20,13 +20,14 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   late AppController appController;
-  final controller = ChatController();
+  late ChatController controller;
   final message = TextEditingController();
   @override
   void initState() {
+    controller = widget.contact.chatController;
     appController = Provider.of<AppController>(context, listen: false);
     super.initState();
-    controller.initConection(onReceiveMessage: (message) {
+    controller.onReceiveMessage(onReceiveMessage: (message) {
       setState(() {
         for (var contact in appController.contacts) {
           if ('${contact.ip}:${contact.port}' ==
@@ -85,6 +86,9 @@ class _ChatPageState extends State<ChatPage> {
                 child: DefaultTextField(
                   hintText: 'Write a message',
                   controller: message,
+                  onSubimitted: (value) async{
+                    await onSubmittedMessage();
+                  },
                 )),
             SizedBox(
               width: 25,
@@ -93,27 +97,31 @@ class _ChatPageState extends State<ChatPage> {
                 height: MediaQuery.of(context).size.height * 0.04,
                 width: MediaQuery.of(context).size.height * 0.1,
                 onPressed: () async {
-                  final messageModel = MessageModel(
-                      message: message.text,
-                      indentification: appController.identification);
-                  setState(() {
-                    if (message.text.isNotEmpty) {
-                      for (var contact in appController.contacts) {
-                        if ('${contact.ip}:${contact.port}' ==
-                            '${widget.contact.ip}:${widget.contact.port}') {
-                          contact.messages.add(messageModel);
-                        }
-                      }
-                      message.text = '';
-                    }
-                  });
-                  await controller.sendMessage(message: messageModel);
-                  setState(() {});
+                  await onSubmittedMessage();
                 },
                 title: 'Send')
           ],
         ),
       ),
     ]);
+  }
+
+  Future<void> onSubmittedMessage() async {
+    final messageModel = MessageModel(
+        message: message.text,
+        indentification: appController.identification);
+    setState(() {
+      if (message.text.isNotEmpty) {
+        for (var contact in appController.contacts) {
+          if ('${contact.ip}:${contact.port}' ==
+              '${widget.contact.ip}:${widget.contact.port}') {
+            contact.messages.add(messageModel);
+          }
+        }
+        message.text = '';
+      }
+    });
+    await controller.sendMessage(message: messageModel);
+    setState(() {});
   }
 }

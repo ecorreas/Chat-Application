@@ -10,11 +10,19 @@ class ChatController {
   late IMessageSender _sender;
   late IMessageReceiver _receiver;
 
+
   Future<void> initConection(
-      {required void Function(MessageModel) onReceiveMessage}) async {
-    _socket = await Socket.connect('localhost', 4567);
-    _sender = MessageSender(_socket);
-    _receiver = MessageReceiver(_socket);
+      {required String ip, required int port}) async {
+    try {
+      _socket = await Socket.connect(ip, port);
+      _sender = MessageSender(_socket);
+      _receiver = MessageReceiver(_socket);
+    } catch (e) {
+      throw Exception('User refused your connection');
+    }
+  }
+
+  Future<void> onReceiveMessage({required void Function(MessageModel) onReceiveMessage}) async {
     _receiver.receive().onData((data) {
       final message = String.fromCharCodes(data);
       final map = jsonDecode(message);
@@ -29,11 +37,10 @@ class ChatController {
     return result;
   }
 
-  MessageModel onReceiveMessage(MessageModel message) {
-    return message;
-  }
-
   void close() {
+    _socket.handleError((e){
+      print(e);
+    });
     _socket.close();
   }
 }

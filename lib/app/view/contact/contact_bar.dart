@@ -114,10 +114,11 @@ class _ContactBarState extends State<ContactBar> {
               height: 25,
             ),
             DefaultButton(
-                onPressed: () {
-                  Navigator.of(context).push(
+                onPressed: () async {
+                  await Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => NewConnection()),
                   );
+                  setState(() {});
                 },
                 title: "New Connection")
           ],

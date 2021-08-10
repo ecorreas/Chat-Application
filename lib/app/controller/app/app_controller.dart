@@ -1,17 +1,15 @@
+import 'package:app/app/controller/chat/chat_controller.dart';
 import 'package:app/app/models/contact_model.dart';
 import 'package:app/app/models/message_model.dart';
 
 class AppController {
   String identification = 'Matheus';
 
+  List<ChatController> chatsControllers = [];
+
   List<ContactModel> contacts = [
     ContactModel(
-        ip: 'localhost',
-        port: 5544,
-        name: "Auri",
-        hasConection: false,
-        messages: []),
-    ContactModel(
+      chatController: ChatController(),
         ip: 'localhost',
         port: 4567,
         name: "Evandro",
