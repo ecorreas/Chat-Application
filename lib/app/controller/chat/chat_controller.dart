@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -9,20 +11,21 @@ class ChatController {
   late Socket _socket;
   late IMessageSender _sender;
   late IMessageReceiver _receiver;
+  late bool _state;
 
-
-  Future<void> initConection(
-      {required String ip, required int port}) async {
+  Future<void> initConection({required String ip, required int port}) async {
     try {
       _socket = await Socket.connect(ip, port);
       _sender = MessageSender(_socket);
       _receiver = MessageReceiver(_socket);
+      setStateConnection(true);
     } catch (e) {
       throw Exception('User refused your connection');
     }
   }
 
-  Future<void> onReceiveMessage({required void Function(MessageModel) onReceiveMessage}) async {
+  Future<void> onReceiveMessage(
+      {required void Function(MessageModel) onReceiveMessage}) async {
     _receiver.receive().onData((data) {
       final message = String.fromCharCodes(data);
       final map = jsonDecode(message);
@@ -38,9 +41,17 @@ class ChatController {
   }
 
   void close() {
-    _socket.handleError((e){
+    _socket.handleError((e) {
       print(e);
     });
     _socket.close();
+  }
+
+  void setStateConnection(bool state) {
+    this._state = state;
+  }
+
+  bool getStateConnection() {
+    return _state;
   }
 }
