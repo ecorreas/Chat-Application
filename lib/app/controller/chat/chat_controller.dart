@@ -45,6 +45,7 @@ class ChatController {
       print(e);
     });
     _socket.close();
+    setStateConnection(false);
   }
 
   void setStateConnection(bool state) {
