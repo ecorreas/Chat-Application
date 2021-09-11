@@ -10,9 +10,7 @@ class ChatController {
   late IMessageSender _sender;
   late IMessageReceiver _receiver;
 
-
-  Future<void> initConection(
-      {required String ip, required int port}) async {
+  Future<void> initConection({required String ip, required int port}) async {
     try {
       _socket = await Socket.connect(ip, port);
       _sender = MessageSender(_socket);
@@ -22,14 +20,16 @@ class ChatController {
     }
   }
 
-  Future<void> onReceiveMessage({required void Function(MessageModel) onReceiveMessage}) async {
-    _receiver.receive().onData((data) {
-      final message = String.fromCharCodes(data);
+  Future<void> onReceiveMessage(
+      {required void Function(MessageModel) onReceiveMessage,
+      required void Function() onDone}) async {
+    _receiver.receive().listen((event) {
+      final message = String.fromCharCodes(event);
       final map = jsonDecode(message);
       final result = MessageModel.fromMap(map);
       print(result.message);
       onReceiveMessage(result);
-    });
+    }, onDone: onDone);
   }
 
   Future<bool> sendMessage({required MessageModel message}) async {
@@ -38,7 +38,7 @@ class ChatController {
   }
 
   void close() {
-    _socket.handleError((e){
+    _socket.handleError((e) {
       print(e);
     });
     _socket.close();

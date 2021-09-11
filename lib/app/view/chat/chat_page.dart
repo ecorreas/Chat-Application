@@ -12,7 +12,9 @@ import 'package:provider/provider.dart';
 
 class ChatPage extends StatefulWidget {
   final ContactModel contact;
-  const ChatPage({Key? key, required this.contact}) : super(key: key);
+  final void Function() onDone;
+  const ChatPage({Key? key, required this.contact, required this.onDone})
+      : super(key: key);
 
   @override
   _ChatPageState createState() => _ChatPageState();
@@ -36,6 +38,16 @@ class _ChatPageState extends State<ChatPage> {
           }
         }
       });
+    }, onDone: () {
+      setState(() {
+        appController.contacts
+            .firstWhere((element) =>
+                '${element.ip}:${element.port}' ==
+                '${widget.contact.ip}:${widget.contact.port}')
+            .hasConection = false;
+        widget.contact.hasConection = false;
+      });
+      widget.onDone();
     });
   }
 
@@ -86,7 +98,7 @@ class _ChatPageState extends State<ChatPage> {
                 child: DefaultTextField(
                   hintText: 'Write a message',
                   controller: message,
-                  onSubimitted: (value) async{
+                  onSubimitted: (value) async {
                     await onSubmittedMessage();
                   },
                 )),
@@ -108,8 +120,7 @@ class _ChatPageState extends State<ChatPage> {
 
   Future<void> onSubmittedMessage() async {
     final messageModel = MessageModel(
-        message: message.text,
-        indentification: appController.identification);
+        message: message.text, indentification: appController.identification);
     setState(() {
       if (message.text.isNotEmpty) {
         for (var contact in appController.contacts) {

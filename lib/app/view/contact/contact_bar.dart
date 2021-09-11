@@ -16,10 +16,8 @@ class ContactBar extends StatefulWidget {
 }
 
 class _ContactBarState extends State<ContactBar> {
-  late AppController appController;
   @override
   void initState() {
-    appController = Provider.of<AppController>(context, listen: false);
     super.initState();
   }
 
@@ -64,10 +62,14 @@ class _ContactBarState extends State<ContactBar> {
             ),
             Column(
                 children: List.generate(
-              appController.contacts.length,
+              Provider.of<AppController>(context, listen: false)
+                  .contacts
+                  .length,
               (index) => ListTile(
                 onTap: () {
-                  widget.onSelect(appController.contacts[index]);
+                  widget.onSelect(
+                      Provider.of<AppController>(context, listen: false)
+                          .contacts[index]);
                 },
                 leading: Container(
                   height: 50,
@@ -76,7 +78,9 @@ class _ContactBarState extends State<ContactBar> {
                       color: AppColors.primary, shape: BoxShape.circle),
                   child: Center(
                     child: Text(
-                        appController.contacts[index].name
+                        Provider.of<AppController>(context, listen: false)
+                            .contacts[index]
+                            .name
                             .substring(0, 2)
                             .toUpperCase(),
                         style: TextStyle(
@@ -86,17 +90,24 @@ class _ContactBarState extends State<ContactBar> {
                         )),
                   ),
                 ),
-                title: Text(appController.contacts[index].name,
+                title: Text(
+                    Provider.of<AppController>(context, listen: false)
+                        .contacts[index]
+                        .name,
                     style: TextStyle(
                       color: AppColors.black,
                       fontSize: 18,
                     )),
                 subtitle: Text(
-                    appController.contacts[index].hasConection
+                    Provider.of<AppController>(context, listen: false)
+                            .contacts[index]
+                            .hasConection
                         ? 'Conectado'
                         : 'Sem Conexão',
                     style: TextStyle(
-                      color: appController.contacts[index].hasConection
+                      color: Provider.of<AppController>(context, listen: false)
+                              .contacts[index]
+                              .hasConection
                           ? Colors.green
                           : AppColors.black50,
                       fontSize: 18,

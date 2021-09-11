@@ -13,7 +13,7 @@ class MessageModel {
       'message': message,
       'sendedAt': DateTime.now().microsecondsSinceEpoch,
       'indentification': indentification,
-    };  
+    };
   }
 
   factory MessageModel.fromMap(Map<String, dynamic> map) {

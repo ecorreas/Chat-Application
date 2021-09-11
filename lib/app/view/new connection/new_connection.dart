@@ -25,9 +25,7 @@ class _NewConnectionState extends State<NewConnection> {
           width: 532,
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15)
-          ),
+              color: Colors.white, borderRadius: BorderRadius.circular(15)),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -39,7 +37,9 @@ class _NewConnectionState extends State<NewConnection> {
                   controller: controllerIP,
                 ),
               ),
-              SizedBox(width: 10,),
+              SizedBox(
+                width: 10,
+              ),
               Container(
                 width: 85,
                 child: DefaultTextField(
@@ -47,40 +47,51 @@ class _NewConnectionState extends State<NewConnection> {
                   controller: controllerPort,
                 ),
               ),
-              SizedBox(width: 10,),
+              SizedBox(
+                width: 10,
+              ),
               DefaultButton(
-                width: 100,
-                onPressed: () async {
-                  DefaultAlertDialog.showLoading(context,
-                  barrierDismissible: true);
-                  bool hasError = false;
-                  final newController = ChatController();
-                  await newController.initConection(ip: controllerIP.text, 
-                  port: int.parse(controllerPort.text)).catchError((e){
-                    Navigator.pop(context);
-                    hasError = true;
-                    DefaultAlertDialog.show(context, message: e.message,
-                      barrierDismissible: true
-                    );
-                  });
-                  if (!hasError) {
-                    await DefaultAlertDialog.show(context, message: 'Conection successful',
-                      barrierDismissible: true
-                    ).whenComplete(() {
-                      Provider.of<AppController>(context, listen: false).contacts.add(
-                        ContactModel(
-                        chatController: newController,
-                        ip: controllerIP.text, port: int.parse(controllerPort.text),
-                        name: controllerIP.text, 
-                        hasConection: true, messages: []));
+                  width: 100,
+                  onPressed: () async {
+                    DefaultAlertDialog.showLoading(context,
+                        barrierDismissible: true);
+                    bool hasError = false;
+                    final newController = ChatController();
+                    await newController
+                        .initConection(
+                            ip: controllerIP.text,
+                            port: int.parse(controllerPort.text))
+                        .catchError((e) {
                       Navigator.pop(context);
-                      Navigator.pop(context);
+                      hasError = true;
+                      DefaultAlertDialog.show(context,
+                          message: e.message, barrierDismissible: true);
                     });
-                  }
-                }, title: 'Connect'),
-              SizedBox(width: 10,),
+                    if (!hasError) {
+                      await DefaultAlertDialog.show(context,
+                              message: 'Conection successful',
+                              barrierDismissible: true)
+                          .whenComplete(() {
+                        Provider.of<AppController>(context, listen: false)
+                            .contacts
+                            .add(ContactModel(
+                                chatController: newController,
+                                ip: controllerIP.text,
+                                port: int.parse(controllerPort.text),
+                                name: controllerIP.text,
+                                hasConection: true,
+                                messages: []));
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                      });
+                    }
+                  },
+                  title: 'Connect'),
+              SizedBox(
+                width: 10,
+              ),
               DefaultButton(
-                width: 100,
+                  width: 100,
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

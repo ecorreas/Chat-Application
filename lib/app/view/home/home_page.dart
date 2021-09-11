@@ -44,7 +44,9 @@ class _HomePageState extends State<HomePage> {
           child: contactSelected != null
               ? ChatPage(
                   contact: contactSelected!,
-                )
+                  onDone: () {
+                    setState(() {});
+                  })
               : Center(
                   child: Text(
                     'Bem vindo ao\nChat Application',

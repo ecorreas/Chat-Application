@@ -5,7 +5,8 @@ class DefaultTextField extends StatelessWidget {
   final String? hintText;
   final void Function(String)? onSubimitted;
   final TextEditingController? controller;
-  const DefaultTextField({Key? key, this.controller, this.hintText, this.onSubimitted})
+  const DefaultTextField(
+      {Key? key, this.controller, this.hintText, this.onSubimitted})
       : super(key: key);
 
   @override

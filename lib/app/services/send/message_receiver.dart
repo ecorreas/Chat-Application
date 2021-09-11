@@ -1,9 +1,7 @@
-import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
 abstract class IMessageReceiver {
-  StreamSubscription receive();
+  Socket receive();
 }
 
 class MessageReceiver implements IMessageReceiver {
@@ -11,17 +9,7 @@ class MessageReceiver implements IMessageReceiver {
   MessageReceiver(this._socket);
 
   @override
-  StreamSubscription receive() {
-    return _socket.listen(
-      (Uint8List data) {
-        print('Received: $data');
-      },
-      onError: (error) {
-        _socket.destroy();
-      },
-      onDone: () {
-        _socket.destroy();
-      },
-    );
+  Socket receive() {
+    return _socket;
   }
 }

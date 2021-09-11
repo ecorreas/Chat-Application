@@ -9,9 +9,9 @@ class AppController {
 
   List<ContactModel> contacts = [
     ContactModel(
-      chatController: ChatController(),
+        chatController: ChatController(),
         ip: 'localhost',
-        port: 4567,
+        port: 4568,
         name: "Evandro",
         hasConection: true,
         messages: [

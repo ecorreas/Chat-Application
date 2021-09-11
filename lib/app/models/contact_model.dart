@@ -9,12 +9,11 @@ class ContactModel {
   List<MessageModel> messages;
   ChatController chatController;
 
-  ContactModel({
-    required this.ip,
-    required this.port,
-    required this.name,
-    required this.hasConection,
-    required this.messages,
-    required this.chatController
-  });
+  ContactModel(
+      {required this.ip,
+      required this.port,
+      required this.name,
+      required this.hasConection,
+      required this.messages,
+      required this.chatController});
 }

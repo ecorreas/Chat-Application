@@ -12,7 +12,11 @@ class MessageSender implements IMessageSender {
 
   @override
   Future<bool> send(MessageModel message) async {
-    _socket.write(message.toJson());
+    try {
+      _socket.write(message.toJson());
+    } catch (e) {
+      print(e);
+    }
     return true;
   }
 }
